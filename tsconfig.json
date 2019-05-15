@@ -14,6 +14,15 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "baseUrl": "/",
+    "paths": {
+      "@flight-app/data-access": [
+        "projects/data-access/src/public_api.ts"
+      ],
+      "data-access/*": [
+        "dist/data-access/*"
+      ]
+    }
   }
 }

@@ -1,6 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ɵangular_packages_platform_browser_platform_browser_k } from '@angular/platform-browser';
-import { FlightService } from '../flight-search/flight.service';
 
 export type CityFormat = 'short' | 'long';
 
@@ -9,10 +7,6 @@ export type CityFormat = 'short' | 'long';
   pure: true
 })
 export class CityPipe implements PipeTransform {
-
-  constructor(private flightService: FlightService) {
-
-  }
 
   transform(value: string, fmt: CityFormat): string {
     

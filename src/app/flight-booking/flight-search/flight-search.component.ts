@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Flight } from '../models/flight';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { FlightService, DummyFlightService } from './flight.service';
+import { Flight } from '../../models/flight';
 
 @Component({
   selector: 'app-flight-search',
@@ -15,8 +14,17 @@ export class FlightSearchComponent implements OnInit {
 
   from: string;
   to: string;
-  flights: Array<Flight> = [];
+  // flights: Array<Flight> = [];
   selectedFlight: Flight;
+
+  get flights() {
+    return this.flightService.flights;  
+  }
+
+  basket: object = {
+    "3": true,
+    "5": true
+  };
 
   constructor(private flightService: FlightService) { }
 
@@ -33,10 +41,7 @@ export class FlightSearchComponent implements OnInit {
     //   }
     // ];
 
-    this.flightService.find(this.from, this.to).subscribe(
-      flights => { this.flights = flights; },
-      err => { console.error('err', err); }
-    );
+    this.flightService.load(this.from, this.to);
 
   }
 

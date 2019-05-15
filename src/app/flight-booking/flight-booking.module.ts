@@ -1,18 +1,25 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FlightBookingComponent } from './flight-booking.component';
-import { FlightSearchComponent } from '../flight-search/flight-search.component';
-import { FlightService, DefaultFlightService } from '../flight-search/flight.service';
 import { SharedModule } from '../shared/shared.module';
-import { FormsModule } from '@angular/forms';
+import { FlightSearchComponent } from './flight-search/flight-search.component';
+import { FlightService, DefaultFlightService } from './flight-search/flight.service';
+import { FlightCardComponent } from './flight-card/flight-card.component';
+import { RouterModule } from '@angular/router';
+import { FLIGHT_BOOKING_ROUTES } from './flight-booking.routes';
+import { PassengerSearchComponent } from './passenger-search/passenger-search.component';
+import { FlightEditComponent } from './flight-edit/flight-edit.component';
 
 @NgModule({
   imports: [
-    SharedModule
+    SharedModule,
+    RouterModule.forChild(FLIGHT_BOOKING_ROUTES),
   ],
   declarations: [
     FlightBookingComponent,
-    FlightSearchComponent
+    FlightSearchComponent,
+    FlightCardComponent,
+    PassengerSearchComponent,
+    FlightEditComponent
   ],
   providers: [
     { provide: FlightService, useClass: DefaultFlightService }
