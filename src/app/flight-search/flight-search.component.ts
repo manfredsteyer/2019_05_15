@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Flight } from '../models/flight';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { FlightService, DummyFlightService } from './flight.service';
 
 @Component({
   selector: 'app-flight-search',
   templateUrl: './flight-search.component.html',
-  styleUrls: ['./flight-search.component.css']
+  styleUrls: ['./flight-search.component.css'],
+  providers: [
+    // { provide: FlightService, useClass: DummyFlightService }
+  ]
 })
 export class FlightSearchComponent implements OnInit {
 
@@ -14,7 +18,7 @@ export class FlightSearchComponent implements OnInit {
   flights: Array<Flight> = [];
   selectedFlight: Flight;
 
-  constructor(private http: HttpClient) { }
+  constructor(private flightService: FlightService) { }
 
   ngOnInit() {
   }
@@ -29,11 +33,7 @@ export class FlightSearchComponent implements OnInit {
     //   }
     // ];
 
-    const url = 'http://www.angular.at/api/flight';
-     const params = { 'from': this.from, 'to': this.to };
-    const headers = new HttpHeaders().set('Accept', 'application/json');
-
-    this.http.get<Flight[]>(url, { params, headers }).subscribe(
+    this.flightService.find(this.from, this.to).subscribe(
       flights => { this.flights = flights; },
       err => { console.error('err', err); }
     );
@@ -45,3 +45,5 @@ export class FlightSearchComponent implements OnInit {
   }
 
 }
+
+

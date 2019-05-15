@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FlightSearchComponent } from './flight-search.component';
+import { FlightService, DummyFlightService } from './flight.service';
 
 describe('FlightSearchComponent', () => {
   let component: FlightSearchComponent;
@@ -8,7 +9,8 @@ describe('FlightSearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FlightSearchComponent ]
+      declarations: [ FlightSearchComponent ],
+      providers: [{provide: FlightService, useClass: DummyFlightService }]
     })
     .compileComponents();
   }));
@@ -20,6 +22,13 @@ describe('FlightSearchComponent', () => {
   });
 
   it('should create', () => {
+
+    component.from = '';
+    component.search();
+    
+
     expect(component).toBeTruthy();
+
+
   });
 });
